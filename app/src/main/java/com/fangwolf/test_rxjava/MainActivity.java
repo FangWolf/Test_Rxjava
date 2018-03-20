@@ -25,11 +25,14 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity {
 
     String TAG = "MainActivity";
+    private Subscription mSubscription; // 用于保存Subscription对象
     TextView tv;
     Button fire;
     Button fire2;
     Button fire3;
     Button fire4;
+    Button fire5;// 该按钮用于调用Subscription.request（long n ）
+    Button fire5_1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         fire2 = findViewById(R.id.fire2);
         fire3 = findViewById(R.id.fire3);
         fire4 = findViewById(R.id.fire4);
+        fire5 = findViewById(R.id.fire5);
+        fire5_1 = findViewById(R.id.fire5_1);
 
         fire.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -280,6 +285,58 @@ public class MainActivity extends AppCompatActivity {
                                 Log.e(TAG, "onComplete");
                             }
                         });
+            }
+        });
+
+        fire5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Flowable.create(new FlowableOnSubscribe<Integer>() {
+                    @Override
+                    public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+                        Log.e(TAG, "发送事件 1");
+                        emitter.onNext(1);
+                        Log.e(TAG, "发送事件 2");
+                        emitter.onNext(2);
+                        Log.e(TAG, "发送事件 3");
+                        emitter.onNext(3);
+                        Log.e(TAG, "发送事件 4");
+                        emitter.onNext(4);
+                        Log.e(TAG, "发送完成");
+                        emitter.onComplete();
+                    }
+                }, BackpressureStrategy.ERROR).subscribeOn(Schedulers.io()) // 设置被观察者在io线程中进行
+                        .observeOn(AndroidSchedulers.mainThread()) // 设置观察者在主线程中进行
+                        .subscribe(new Subscriber<Integer>() {
+                            @Override
+                            public void onSubscribe(Subscription s) {
+                                Log.e(TAG, "onSubscribe");
+                                mSubscription = s;
+                                // 保存Subscription对象，等待点击按钮时（调用request(2)）观察者再接收事件
+                            }
+
+                            @Override
+                            public void onNext(Integer integer) {
+                                Log.e(TAG, "接收到了事件" + integer);
+                            }
+
+                            @Override
+                            public void onError(Throwable t) {
+                                Log.e(TAG, "onError: ", t);
+                            }
+
+                            @Override
+                            public void onComplete() {
+                                Log.e(TAG, "onComplete");
+                            }
+                        });
+            }
+        });
+
+        fire5_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSubscription.request(2);
             }
         });
     }
