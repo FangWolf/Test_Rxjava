@@ -54,6 +54,11 @@
             android:text="按需取出事件"/>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/fire6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="背压策略2：反馈控制(同步订阅情况下)"/>
 
 
 </LinearLayout>

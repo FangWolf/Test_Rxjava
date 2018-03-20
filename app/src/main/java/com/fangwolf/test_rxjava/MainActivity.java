@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     Button fire4;
     Button fire5;// 该按钮用于调用Subscription.request（long n ）
     Button fire5_1;
+    Button fire6;
+    Button fire7;
+    Button fire8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         fire4 = findViewById(R.id.fire4);
         fire5 = findViewById(R.id.fire5);
         fire5_1 = findViewById(R.id.fire5_1);
+        fire6 = findViewById(R.id.fire6);
 
         fire.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -337,6 +341,52 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mSubscription.request(2);
+            }
+        });
+        fire6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Flowable.create(new FlowableOnSubscribe<Integer>() {
+                    @Override
+                    public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+
+                        // 调用emitter.requested()获取当前观察者需要接收的事件数量
+                        long n = emitter.requested();
+
+                        Log.d(TAG, "观察者可接收事件" + n);
+
+                        // 根据emitter.requested()的值，即当前观察者需要接收的事件数量来发送事件
+                        for (int i = 0; i < n; i++) {
+                            Log.d(TAG, "发送了事件" + i);
+                            emitter.onNext(i);
+                        }
+                    }
+                }, BackpressureStrategy.ERROR)
+                        .subscribe(new Subscriber<Integer>() {
+                            @Override
+                            public void onSubscribe(Subscription s) {
+                                Log.d(TAG, "onSubscribe");
+
+                                // 设置观察者每次能接受10个事件
+                                s.request(10);
+
+                            }
+
+                            @Override
+                            public void onNext(Integer integer) {
+                                Log.d(TAG, "接收到了事件" + integer);
+                            }
+
+                            @Override
+                            public void onError(Throwable t) {
+                                Log.w(TAG, "onError: ", t);
+                            }
+
+                            @Override
+                            public void onComplete() {
+                                Log.d(TAG, "onComplete");
+                            }
+                        });
             }
         });
     }
