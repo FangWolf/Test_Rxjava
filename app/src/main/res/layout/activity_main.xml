@@ -15,6 +15,20 @@
         android:id="@+id/fire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="fire"/>
+        android:text="Rx1.0: Observable - Observer"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/fire2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="事件 发送/处理 流速不同，造成oom"/>
+
+    <Button
+        android:id="@+id/fire3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rx2.0: Flowable - Subscriber"
+        android:textAllCaps="false"/>
 
 </LinearLayout>
