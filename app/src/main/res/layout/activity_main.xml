@@ -60,5 +60,25 @@
         android:layout_height="wrap_content"
         android:text="背压策略2：反馈控制(同步订阅情况下)"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/fire7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="背压策略3：缓冲区 发500事件"/>
+
+        <Button
+            android:id="@+id/fire7_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="处理48个/每次点击(异步订阅)"/>
+    </LinearLayout>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="当缓冲区<=32且已处理>=96,则request(96)"/>
 
 </LinearLayout>
