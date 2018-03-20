@@ -10,6 +10,8 @@ import android.widget.TextView;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     Button fire6;
     Button fire7;
     Button fire7_1;
+    Button fire8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         fire6 = findViewById(R.id.fire6);
         fire7 = findViewById(R.id.fire7);
         fire7_1 = findViewById(R.id.fire7_1);
+        fire8 = findViewById(R.id.fire8);
 
         fire.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -455,6 +459,45 @@ public class MainActivity extends AppCompatActivity {
                 // 点击按钮 则 接收48个事件
             }
         });
+        fire8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 通过interval自动创建被观察者Flowable
+                // 每隔1ms将当前数字（从0开始）加1，并发送出去
+                // interval操作符会默认新开1个新的工作线程
+                Flowable.interval(1, TimeUnit.MILLISECONDS)
+                        .onBackpressureBuffer() //背压策略
+                        .observeOn(Schedulers.newThread()) // 观察者同样工作在一个新开线程中
+                        .subscribe(new Subscriber<Long>() {
+                            @Override
+                            public void onSubscribe(Subscription s) {
+                                Log.d(TAG, "onSubscribe");
+                                mSubscription = s;
+                                s.request(Long.MAX_VALUE); //默认可以接收Long.MAX_VALUE个事件
+                            }
 
+                            @Override
+                            public void onNext(Long aLong) {
+                                Log.d(TAG, "onNext: " + aLong);
+                                try {
+                                    Thread.sleep(1000);
+                                    // 每次延时1秒再接收事件
+                                    // 因为发送事件 = 延时1ms，接收事件 = 延时1s，出现了发送速度 & 接收速度不匹配的问题
+                                    // 缓存区很快就存满了128个事件，从而抛出MissingBackpressureException异常，请看下图结果
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            @Override
+                            public void onError(Throwable t) {
+                                Log.w(TAG, "onError: ", t);
+                            }
+                            @Override
+                            public void onComplete() {
+                                Log.d(TAG, "onComplete");
+                            }
+                        });
+            }
+        });
     }
 }

@@ -79,6 +79,13 @@
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="当缓冲区<=32且已处理>=96,则request(96)"/>
+    android:text="当缓冲区32≤且已处理≥96,则request(96)"/>
+
+    <Button
+        android:id="@+id/fire8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用interval自动生成Flowable,用onBackpressure___()实现背压策略"
+        android:textAllCaps="false"/>
 
 </LinearLayout>
