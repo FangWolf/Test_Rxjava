@@ -31,4 +31,10 @@
         android:text="Rx2.0: Flowable - Subscriber"
         android:textAllCaps="false"/>
 
+    <Button
+        android:id="@+id/fire4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="背压策略1:响应式拉取"/>
+
 </LinearLayout>

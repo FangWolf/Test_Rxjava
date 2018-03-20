@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Button fire;
     Button fire2;
     Button fire3;
+    Button fire4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         fire = findViewById(R.id.fire);
         fire2 = findViewById(R.id.fire2);
         fire3 = findViewById(R.id.fire3);
+        fire4 = findViewById(R.id.fire4);
 
         fire.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,6 +228,58 @@ public class MainActivity extends AppCompatActivity {
                  * 步骤3：建立订阅关系
                  *//*
                 upstream.subscribe(downstream);*/
+            }
+        });
+
+        fire4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 1. 创建被观察者Flowable
+                Flowable.create(new FlowableOnSubscribe<Integer>() {
+                    @Override
+                    public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+                        // 一共发送4个事件
+                        Log.e(TAG, "发送事件 1");
+                        emitter.onNext(1);
+                        Log.e(TAG, "发送事件 2");
+                        emitter.onNext(2);
+                        Log.e(TAG, "发送事件 3");
+                        emitter.onNext(3);
+                        Log.e(TAG, "发送事件 4");
+                        emitter.onNext(4);
+                        Log.e(TAG, "发送完成");
+                        emitter.onComplete();
+                    }
+                }, BackpressureStrategy.ERROR).subscribeOn(Schedulers.io()) // 设置被观察者在io线程中进行
+                        .observeOn(AndroidSchedulers.mainThread()) // 设置观察者在主线程中进行
+                        .subscribe(new Subscriber<Integer>() {
+                            @Override
+                            public void onSubscribe(Subscription s) {
+                                // 对比Observer传入的Disposable参数，Subscriber此处传入的参数 = Subscription
+                                // 相同点：Subscription参数具备Disposable参数的作用，即Disposable.dispose()切断连接, 同样的调用Subscription.cancel()切断连接
+                                // 不同点：Subscription增加了void request(long n)
+
+                                s.request(3);
+                                // 作用：决定观察者能够接收多少个事件
+                                // 如设置了s.request(3)，这就说明观察者能够接收3个事件（多出的事件存放在缓存区）
+                                // 官方默认推荐使用Long.MAX_VALUE，即s.request(Long.MAX_VALUE);
+                            }
+
+                            @Override
+                            public void onNext(Integer integer) {
+                                Log.e(TAG, "接收到了事件" + integer);
+                            }
+
+                            @Override
+                            public void onError(Throwable t) {
+                                Log.e(TAG, "onError: ", t);
+                            }
+
+                            @Override
+                            public void onComplete() {
+                                Log.e(TAG, "onComplete");
+                            }
+                        });
             }
         });
     }
