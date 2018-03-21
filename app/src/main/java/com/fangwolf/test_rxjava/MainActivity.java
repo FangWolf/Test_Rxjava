@@ -1,5 +1,6 @@
 package com.fangwolf.test_rxjava;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     Button fire7;
     Button fire7_1;
     Button fire8;
+    Button to2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
         fire7 = findViewById(R.id.fire7);
         fire7_1 = findViewById(R.id.fire7_1);
         fire8 = findViewById(R.id.fire8);
+        to2 = findViewById(R.id.to2);
+
+        to2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Main2Activity.class);
+                startActivity(intent);
+            }
+        });
 
         fire.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,87 +5,104 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-
-    <Button
-        android:id="@+id/fire"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rx1.0: Observable - Observer"
-        android:textAllCaps="false"/>
-
-    <Button
-        android:id="@+id/fire2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="事件 发送/处理 流速不同，造成oom"/>
-
-    <Button
-        android:id="@+id/fire3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rx2.0: Flowable - Subscriber"
-        android:textAllCaps="false"/>
-
-    <Button
-        android:id="@+id/fire4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="背压策略1:响应式拉取"/>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/fire5"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="连续发送事件"/>
+            android:text="Hello World!"/>
 
         <Button
-            android:id="@+id/fire5_1"
+            android:id="@+id/fire"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="按需取出事件"/>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/fire6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="背压策略2：反馈控制(同步订阅情况下)"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/fire7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="背压策略3：缓冲区 发500事件"/>
+            android:text="Rx1.0: Observable - Observer"
+            android:textAllCaps="false"/>
 
         <Button
-            android:id="@+id/fire7_1"
+            android:id="@+id/fire2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="处理48个/每次点击(异步订阅)"/>
-    </LinearLayout>
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="当缓冲区32≤且已处理≥96,则request(96)"/>
+            android:text="事件 发送/处理 流速不同，造成oom"/>
 
-    <Button
-        android:id="@+id/fire8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="用interval自动生成Flowable,用onBackpressure___()实现背压策略"
-        android:textAllCaps="false"/>
+        <Button
+            android:id="@+id/fire3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rx2.0: Flowable - Subscriber"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/fire4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="背压策略1:响应式拉取"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/fire5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="连续发送事件"/>
+
+            <Button
+                android:id="@+id/fire5_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="按需取出事件"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/fire6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="背压策略2：反馈控制(同步订阅情况下)"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/fire7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="背压策略3：缓冲区 发500事件"/>
+
+            <Button
+                android:id="@+id/fire7_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="处理48个/每次点击(异步订阅)"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="当缓冲区32≤且已处理≥96,则request(96)"/>
+
+        <Button
+            android:id="@+id/fire8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用interval自动生成Flowable,用onBackpressure___()实现背压策略"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/to2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="去RxJava 组合合并操作符练习"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
