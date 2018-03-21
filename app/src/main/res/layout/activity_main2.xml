@@ -20,4 +20,38 @@
         android:text="concatArray"
         android:textAllCaps="false"/>
 
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn0"
+        android:text="merge"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn1_0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn0"
+        android:layout_toRightOf="@id/btn1"
+        android:text="mergeArray 与上面类似"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn1"
+        android:text="不用concatDelayError()"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn2_0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn1"
+        android:layout_toRightOf="@id/btn2"
+        android:text="用concatDelayError()"
+        android:textAllCaps="false"/>
+
 </RelativeLayout>
