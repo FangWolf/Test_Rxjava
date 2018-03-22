@@ -41,6 +41,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.btn5).setOnClickListener(this);
         findViewById(R.id.btn6).setOnClickListener(this);
         findViewById(R.id.btn7).setOnClickListener(this);
+        findViewById(R.id.btn8).setOnClickListener(this);
     }
 
     @Override
@@ -397,6 +398,18 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onComplete() {
                                 Log.d(TAG, "对Complete事件作出响应");
+                            }
+                        });
+                break;
+            case R.id.btn8:
+                // 注：返回结果 = Long类型
+                Observable.just(1, 2, 3, 4)
+                        .count()
+                        .subscribe(new Consumer<Long>() {
+                            @Override
+                            public void accept(Long aLong) throws Exception {
+                                Log.e(TAG, "发送的事件数量 =  " + aLong);
+
                             }
                         });
                 break;

@@ -65,8 +65,8 @@
         android:id="@+id/tv2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btn2"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn2"
         android:text="合并多事件"/>
 
     <Button
@@ -121,6 +121,23 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView"
         android:text="startWith()/startWithArray()"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn7"
+        android:text="统计事件发送量"
+        android:id="@+id/textView2"/>
+
+    <Button
+        android:id="@+id/btn8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="count()"
         android:textAllCaps="false"/>
 
 </RelativeLayout>
