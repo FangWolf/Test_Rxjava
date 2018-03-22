@@ -12,6 +12,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
@@ -34,6 +35,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.btn2_0).setOnClickListener(this);
         findViewById(R.id.btn3).setOnClickListener(this);
         findViewById(R.id.btn4).setOnClickListener(this);
+        findViewById(R.id.btn5).setOnClickListener(this);
     }
 
     @Override
@@ -291,6 +293,25 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void accept(Long s) throws Exception {
                         Log.e(TAG, "合并的结果是： " + s);
+                    }
+                });
+                break;
+            case R.id.btn5:
+                Observable.just(1, 2, 3, 4)
+                        .reduce(new BiFunction<Integer, Integer, Integer>() {
+                            // 在该复写方法中复写聚合的逻辑,要啥写啥
+                            @Override
+                            public Integer apply(@NonNull Integer s1, @NonNull Integer s2) throws Exception {
+                                Log.e(TAG, "本次计算的数据是： " + s1 + " 乘 " + s2);
+                                return s1 * s2;
+                                // 本次聚合的逻辑是：全部数据相乘起来
+                                // 原理：第1次取前2个数据相乘，之后每次获取到的数据 = 返回的数据x原始下1个数据每
+                            }
+                        }).subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(@NonNull Integer s) throws Exception {
+                        Log.e(TAG, "最终计算的结果是： " + s);
+
                     }
                 });
                 break;

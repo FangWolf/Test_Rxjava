@@ -83,5 +83,12 @@
         android:layout_below="@id/btn3"
         android:text="combineLatest() ,combineLatestDelayError()"
         android:textAllCaps="false"/>
+    <Button
+        android:id="@+id/btn5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn4"
+        android:text="reduce()"
+        android:textAllCaps="false"/>
 
 </RelativeLayout>
