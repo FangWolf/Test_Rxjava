@@ -65,15 +65,16 @@
         android:id="@+id/tv2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn2"
+        android:layout_alignBottom="@+id/btn2"
+        android:layout_alignParentStart="true"
         android:text="合并多事件"/>
 
     <Button
         android:id="@+id/btn3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btn4"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/btn4"
         android:text="Zip()"
         android:textAllCaps="false"/>
 
@@ -82,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/tv2"
+        android:layout_centerVertical="true"
         android:text="combineLatest() ,combineLatestDelayError()"
         android:textAllCaps="false"/>
 
@@ -90,9 +91,8 @@
         android:id="@+id/btn5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btn3"
-        android:layout_alignBottom="@+id/btn3"
-        android:layout_toEndOf="@+id/btn3"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn4"
         android:text="reduce()"
         android:textAllCaps="false"/>
 
@@ -100,9 +100,27 @@
         android:id="@+id/btn6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/btn4"
-        android:layout_toEndOf="@+id/btn5"
+        android:layout_marginTop="51dp"
         android:text="collect()"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn6"
+        android:text="发送事件前追加"
+        android:id="@+id/textView"/>
+
+    <Button
+        android:id="@+id/btn7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:text="startWith()/startWithArray()"
         android:textAllCaps="false"/>
 
 </RelativeLayout>
