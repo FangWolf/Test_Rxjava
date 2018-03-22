@@ -14,6 +14,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class Main2Activity extends AppCompatActivity implements View.OnClickListener {
@@ -32,6 +33,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.btn2).setOnClickListener(this);
         findViewById(R.id.btn2_0).setOnClickListener(this);
         findViewById(R.id.btn3).setOnClickListener(this);
+        findViewById(R.id.btn4).setOnClickListener(this);
     }
 
     @Override
@@ -268,6 +270,27 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete() {
                         Log.d(TAG, "onComplete");
+                    }
+                });
+                break;
+            case R.id.btn4:
+                Observable.combineLatest(
+                        Observable.just(1L, 2L, 3L), // 第1个发送数据事件的Observable
+                        Observable.intervalRange(0, 3, 1, 1, TimeUnit.SECONDS), // 第2个发送数据事件的Observable：从0开始发送、共发送3个数据、第1次事件延迟发送时间 = 1s、间隔时间 = 1s
+                        new BiFunction<Long, Long, Long>() {
+                            @Override
+                            public Long apply(Long o1, Long o2) throws Exception {
+                                // o1 = 第1个Observable发送的最新（最后）1个数据
+                                // o2 = 第2个Observable发送的每1个数据
+                                Log.e(TAG, "合并的数据是： " + o1 + " " + o2);
+                                return o1 + o2;
+                                // 合并的逻辑 = 相加
+                                // 即第1个Observable发送的最后1个数据 与 第2个Observable发送的每1个数据进行相加
+                            }
+                        }).subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long s) throws Exception {
+                        Log.e(TAG, "合并的结果是： " + s);
                     }
                 });
                 break;
