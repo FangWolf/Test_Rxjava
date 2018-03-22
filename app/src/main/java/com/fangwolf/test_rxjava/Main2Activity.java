@@ -13,6 +13,8 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.schedulers.Schedulers;
 
 public class Main2Activity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,6 +31,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.btn1_0).setOnClickListener(this);
         findViewById(R.id.btn2).setOnClickListener(this);
         findViewById(R.id.btn2_0).setOnClickListener(this);
+        findViewById(R.id.btn3).setOnClickListener(this);
     }
 
     @Override
@@ -191,6 +194,82 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                                 Log.d(TAG, "对Complete事件作出响应");
                             }
                         });
+                break;
+            case R.id.btn3:
+                //创建第1个被观察者
+                Observable<Integer> observable1 = Observable.create(new ObservableOnSubscribe<Integer>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                        Log.d(TAG, "被观察者1发送了事件1");
+                        emitter.onNext(1);
+                        // 为了方便展示效果，所以在发送事件后加入延迟
+                        Thread.sleep(500);
+
+                        Log.d(TAG, "被观察者1发送了事件2");
+                        emitter.onNext(2);
+                        Thread.sleep(500);
+
+                        Log.d(TAG, "被观察者1发送了事件3");
+                        emitter.onNext(3);
+                        Thread.sleep(500);
+
+                        emitter.onComplete();
+                    }
+                }).subscribeOn(Schedulers.io()); // 设置被观察者1在工作线程1中工作
+
+                //创建第2个被观察者
+                Observable<String> observable2 = Observable.create(new ObservableOnSubscribe<String>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+                        Log.d(TAG, "被观察者2发送了事件A");
+                        emitter.onNext("A");
+                        Thread.sleep(500);
+
+                        Log.d(TAG, "被观察者2发送了事件B");
+                        emitter.onNext("B");
+                        Thread.sleep(500);
+
+                        Log.d(TAG, "被观察者2发送了事件C");
+                        emitter.onNext("C");
+                        Thread.sleep(500);
+
+                        Log.d(TAG, "被观察者2发送了事件D");
+                        emitter.onNext("D");
+                        Thread.sleep(500);
+
+                        emitter.onComplete();
+                    }
+                }).subscribeOn(Schedulers.newThread());// 设置被观察者2在工作线程2中工作
+                // 假设不作线程控制，则该两个被观察者会在同一个线程中工作，即发送事件存在先后顺序，而不是同时发送
+
+                //使用zip变换操作符进行事件合并
+                // 注：创建BiFunction对象传入的第3个参数 = 合并后数据的数据类型
+                Observable.zip(observable1, observable2, new BiFunction<Integer, String, String>() {
+                    @Override
+                    public String apply(Integer integer, String string) throws Exception {
+                        return integer + string;
+                    }
+                }).subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d(TAG, "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(String value) {
+                        Log.d(TAG, "最终接收到的事件 =  " + value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "onError");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete");
+                    }
+                });
                 break;
             default:
                 break;

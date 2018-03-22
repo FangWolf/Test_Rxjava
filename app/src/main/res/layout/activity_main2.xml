@@ -5,10 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="组合多个观察者"/>
     <Button
         android:id="@+id/btn0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tv1"
         android:text="concat"
         android:textAllCaps="false"/>
 
@@ -16,6 +22,7 @@
         android:id="@+id/btn0_0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tv1"
         android:layout_toRightOf="@id/btn0"
         android:text="concatArray"
         android:textAllCaps="false"/>
@@ -52,6 +59,21 @@
         android:layout_below="@id/btn1"
         android:layout_toRightOf="@id/btn2"
         android:text="用concatDelayError()"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn2"
+        android:text="合并多事件"/>
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv2"
+        android:text="Zip()"
         android:textAllCaps="false"/>
 
 </RelativeLayout>
