@@ -72,7 +72,8 @@
         android:id="@+id/btn3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv2"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn4"
         android:text="Zip()"
         android:textAllCaps="false"/>
 
@@ -80,15 +81,28 @@
         android:id="@+id/btn4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn3"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv2"
         android:text="combineLatest() ,combineLatestDelayError()"
         android:textAllCaps="false"/>
+
     <Button
         android:id="@+id/btn5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn4"
+        android:layout_alignBaseline="@+id/btn3"
+        android:layout_alignBottom="@+id/btn3"
+        android:layout_toEndOf="@+id/btn3"
         android:text="reduce()"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn4"
+        android:layout_toEndOf="@+id/btn5"
+        android:text="collect()"
         android:textAllCaps="false"/>
 
 </RelativeLayout>

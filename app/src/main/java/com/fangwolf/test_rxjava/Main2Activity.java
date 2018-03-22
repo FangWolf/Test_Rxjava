@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -14,6 +16,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -36,6 +39,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.btn3).setOnClickListener(this);
         findViewById(R.id.btn4).setOnClickListener(this);
         findViewById(R.id.btn5).setOnClickListener(this);
+        findViewById(R.id.btn6).setOnClickListener(this);
     }
 
     @Override
@@ -311,6 +315,32 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void accept(@NonNull Integer s) throws Exception {
                         Log.e(TAG, "最终计算的结果是： " + s);
+
+                    }
+                });
+                break;
+            case R.id.btn6:
+                Observable.just(1, 2, 3, 4, 5, 6)
+                        .collect(
+                                // 1. 创建数据结构（容器），用于收集被观察者发送的数据
+                                new Callable<ArrayList<Integer>>() {
+                                    @Override
+                                    public ArrayList<Integer> call() throws Exception {
+                                        return new ArrayList<>();
+                                    }
+                                    // 2. 对发送的数据进行收集
+                                }, new BiConsumer<ArrayList<Integer>, Integer>() {
+                                    @Override
+                                    public void accept(ArrayList<Integer> list, Integer integer)
+                                            throws Exception {
+                                        // 参数说明：list = 容器，integer = 后者数据
+                                        list.add(integer);
+                                        // 对发送的数据进行收集
+                                    }
+                                }).subscribe(new Consumer<ArrayList<Integer>>() {
+                    @Override
+                    public void accept(@NonNull ArrayList<Integer> s) throws Exception {
+                        Log.e(TAG, "本次发送的数据是： " + s);
 
                     }
                 });
