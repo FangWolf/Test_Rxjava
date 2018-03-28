@@ -21,6 +21,14 @@
         android:text="根据 指定条件 过滤"/>
 
     <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnn7"
+        android:text="根据 指定事件位置 过滤"/>
+
+    <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,5 +114,32 @@
         android:layout_below="@+id/btnn6"
         android:text="throttleWithTimeout()/ debounce()"
         android:textAllCaps="false"/>
-    ）
+
+    <Button
+        android:id="@+id/btnn8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView4"
+        android:text="firstElement()/lastElement()"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnn9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_toEndOf="@+id/btnn8"
+        android:text="elementAt()"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnn10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnn8"
+        android:text="elementAtOrError()"
+        android:textAllCaps="false"/>
+
 </RelativeLayout>

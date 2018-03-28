@@ -31,6 +31,9 @@ public class Main3Activity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.btnn5).setOnClickListener(this);
         findViewById(R.id.btnn6).setOnClickListener(this);
         findViewById(R.id.btnn7).setOnClickListener(this);
+        findViewById(R.id.btnn8).setOnClickListener(this);
+        findViewById(R.id.btnn9).setOnClickListener(this);
+        findViewById(R.id.btnn10).setOnClickListener(this);
     }
 
     @Override
@@ -332,6 +335,59 @@ public class Main3Activity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onComplete() {
                                 Log.d(TAG, "对Complete事件作出响应");
+                            }
+                        });
+                break;
+            case R.id.btnn8:
+                // 获取第1个元素
+                Observable.just(1, 2, 3, 4, 5)
+                        .firstElement()
+                        .subscribe(new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                Log.d(TAG, "获取到的第一个事件是： " + integer);
+                            }
+                        });
+
+                // 获取最后1个元素
+                Observable.just(1, 2, 3, 4, 5)
+                        .lastElement()
+                        .subscribe(new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                Log.d(TAG, "获取到的最后1个事件是： " + integer);
+                            }
+                        });
+                break;
+            case R.id.btnn9:
+                // 使用1：获取位置索引 = 2的 元素
+                // 位置索引从0开始
+                Observable.just(1, 2, 3, 4, 5)
+                        .elementAt(2)
+                        .subscribe(new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                Log.d(TAG, "获取到的事件元素是： " + integer);
+                            }
+                        });
+
+                // 使用2：获取的位置索引 ＞ 发送事件序列长度时，设置默认参数
+                Observable.just(1, 2, 3, 4, 5)
+                        .elementAt(6, 10)
+                        .subscribe(new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                Log.d(TAG, "获取到的事件元素是： " + integer);
+                            }
+                        });
+                break;
+            case R.id.btnn10:
+                Observable.just(1, 2, 3, 4, 5)
+                        .elementAtOrError(6)
+                        .subscribe(new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                Log.d(TAG, "获取到的事件元素是： " + integer);
                             }
                         });
                 break;
