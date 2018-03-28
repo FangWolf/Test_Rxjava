@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main3Activity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnn4"
+        android:text="根据指定 事件按数量 过滤"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="根据 指定条件 过滤"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnn5"
+        android:text="根据 指定时间 过滤"/>
+
+
+    <Button
+        android:id="@+id/btnn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:text="filter()"
+        android:textAllCaps="false"/>
+    <Button
+        android:id="@+id/btnn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_toEndOf="@+id/btnn1"
+        android:text="ofType()"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_toEndOf="@+id/btnn2"
+        android:text="skip()/skipLast()"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnn4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnn1"
+        android:text="distinct()/sdistinctUntilCahnged()"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnn5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView3"
+        android:text="take() 接收n个事件"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_toEndOf="@+id/btnn5"
+        android:text="takeLast() 接收后n个事件"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnn6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
+        android:text="throttleFirst()/throttleLast()"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_toEndOf="@+id/btnn6"
+        android:text="Sample()与throttleLast类似"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnn7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnn6"
+        android:text="throttleWithTimeout()/ debounce()"
+        android:textAllCaps="false"/>
+    ）
+</RelativeLayout>
