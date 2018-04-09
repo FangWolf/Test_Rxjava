@@ -12,6 +12,8 @@ import io.reactivex.functions.Consumer;
 
 public class Main4Activity extends AppCompatActivity {
     String TAG = "Main4Activity";
+    String memoryCache = null;
+    String diskCache = "从磁盘缓存中获取数据";
 
     @SuppressLint("CheckResult")
     @Override
@@ -19,8 +21,7 @@ public class Main4Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
         // 该2变量用于模拟内存缓存 & 磁盘缓存中的数据
-        String memoryCache = null;
-        String diskCache = "从磁盘缓存中获取数据";
+
 
         /*
          * 设置第1个Observable：检查内存缓存是否有该数据的缓存
